@@ -32,5 +32,5 @@ Element node:
 is equivalent to
 
 ```html
-<a href=//github.com title="GitHub, social coding'>Go to GitHub</a>
+<a href="//github.com" title="GitHub, social coding">Go to GitHub</a>
 ```

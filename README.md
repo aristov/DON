@@ -23,7 +23,7 @@ Element node:
 
 ```js
 {
-  element : 'a'
+  element : 'a',
   attributes : { href : '//github.com', title : 'GitHub, social coding' },
   content : 'Go to GitHub'
 }

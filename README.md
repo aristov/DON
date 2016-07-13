@@ -17,7 +17,7 @@ Consider this XML UI fragment murkup:
     attributes : { label : 'Simple' },
     content : [
         { element : 'searchbox' },
-        { element : 'submitbutton', text : 'Go' }
+        { element : 'submitbutton', content : 'Go' }
     ]
 }
 ```

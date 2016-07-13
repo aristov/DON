@@ -11,6 +11,7 @@ Consider this XML UI fragment murkup:
     <submitbutton>Go</submitbutton>
 </searchgroup>
 ```
+It's DON representation is:
 ```js
 {
     element : 'searchgroup',

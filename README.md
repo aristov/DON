@@ -140,7 +140,7 @@ It's DON representation is:
                             element : 'title',
                             content : {
                                 node : 'text',
-                                text : 'DON example'
+                                content : 'DON example'
                             }
                         }
                     ]
@@ -157,7 +157,7 @@ It's DON representation is:
                             attributes : { href : '//github.com/aristov/don' },
                             content : {
                                 node : 'text',
-                                text : 'DON on GitHub'
+                                content : 'DON on GitHub'
                             }
                         }
                     ]

@@ -167,3 +167,9 @@ It's DON representation is:
     ]
 }
 ```
+
+## Usage
+
+```
+npm install
+```

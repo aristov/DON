@@ -1,15 +1,15 @@
 # Document Object Notation
 
-Document Object Notation (DON) - is a format intended for convenient work with HTML and XML documents in JavaScript.
-It represents a tree of simple JS-objects with some special fields.
+Document Object Notation (DON) — is a format intended for convenient work with HTML and XML documents in JavaScript.
+It represents a DOM structure as a tree of simple JS-objects with some special fields.
 
 ## Simple Explanation
 
 The most commonly used fields are:
 
-- `element` - the name of `Element` DOM node
-- `attributes` - attributes hash-object of `Element` DOM node
-- `content` - content of `Element` DOM node
+- `element` — the name of `Element` DOM node
+- `attributes` — attributes hash-object of `Element` DOM node
+- `content` — content of `Element` DOM node
 
 ### Example
 Consider simple UI fragment XML murkup:
@@ -33,11 +33,7 @@ It's DON representation is:
 
 ## Details
 
-Key DON special fields are listed below.
-
-### node
-Name of the DOM node represented by the object.
-Can recieve values, representing several DOM nodes:
+`node` special field is used to specify the name of a DOM node represented by the object:
 
 - `document`
 - `doctype`
@@ -45,16 +41,27 @@ Can recieve values, representing several DOM nodes:
 - `comment`
 - `element`
 
+### Examples
+
+#### document
+`Document` node DON equivalent
 ```js
 {
-    node : 'document'
+    node : 'document',
+    title : 'Document title'
 }
 ```
-Depending of a value of this field the object can have additional fields.
 
-#### DON nodes description
+#### doctype
+`DocumentType` node DON equivalent
+```js
+{
+    node : 'doctype',
+    name : 'html'
+}
+```
 
-##### text
+#### text
 `Text` node DON equivalent
 ```js
 {
@@ -67,7 +74,16 @@ Text node may be represented as a simple string:
 'Hello baby!'
 ```
 
-##### element
+#### comment
+`Comment` node DON equivalent
+```js
+{
+    node : 'comment',
+    content : 'Comment node text'
+}
+```
+
+#### element
 `Element` node DON equivalent
 ```js
 {
@@ -79,59 +95,6 @@ When `element` field is specified, `node` may be omitted:
 ```js
 {
     element : 'input'
-}
-```
-
-##### comment
-`Comment` node DON equivalent
-```js
-{
-    node : 'comment',
-    content : 'Comment node text'
-}
-```
-
-##### document
-`Document` node DON equivalent
-```js
-{
-    node : 'document',
-    title : 'Document title'
-}
-```
-
-##### doctype
-`DocumentType` node DON equivalent
-```js
-{
-    node : 'doctype',
-    name : 'html'
-}
-```
-
-### attributes
-Represents attributes hash-object of `Element` node.
-```js
-{
-    element : 'checkbox',
-    attributes : {
-        checked : 'true',
-        view : 'button',
-        name : 'confirm'
-    }
-}
-```
-
-### content
-Represents content of `element`, `text`, `document` or `comment` node.
-```js
-{
-    node : 'document',
-    content : [
-        { node : 'comment', content : 'Comment text' },
-        { node : 'text', content : 'Text node content' },
-        { element : 'button', content : 'Submit' }
-    ]
 }
 ```
 

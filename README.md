@@ -3,8 +3,16 @@
 Document Object Notation (DON) - is a format intended for convenient work with HTML and XML documents in JavaScript.
 It represents a tree of simple JS-objects with some special fields.
 
-## Example
-Consider this XML UI fragment murkup:
+## Simple Explanation
+
+The most commonly used fields are:
+
+- `element` - the name of `Element` DOM node
+- `attributes` - attributes hash-object of `Element` DOM node
+- `content` - content of `Element` DOM node
+
+### Example
+Consider simple UI fragment XML murkup:
 ```xml
 <searchgroup label="Search by Yandex">
     <searchbox/>
@@ -23,10 +31,9 @@ It's DON representation is:
 }
 ```
 
-## Description
+## Details
 
-<details>
-The list of DON special fields:
+Key DON special fields are listed below.
 
 ### node
 Name of the DOM node represented by the object.
@@ -38,7 +45,6 @@ Can recieve values, representing several DOM nodes:
 - `comment`
 - `element`
 
-<small>Example</small>
 ```js
 {
     node : 'document'
@@ -46,17 +52,23 @@ Can recieve values, representing several DOM nodes:
 ```
 Depending of a value of this field the object can have additional fields.
 
-### text
-`TextNode` DON equivalent
+#### DON nodes description
+
+##### text
+`Text` node DON equivalent
 ```js
 {
     node : 'text',
-    text : 'Hello world!'
+    content : 'Hello world!'
 }
 ```
+Text node may be represented as a simple string:
+```js
+'Hello baby!'
+```
 
-### element
-`Element` DON equivalent
+##### element
+`Element` node DON equivalent
 ```js
 {
     node : 'element',
@@ -70,8 +82,35 @@ When `element` field is specified, `node` may be omitted:
 }
 ```
 
+##### comment
+`Comment` node DON equivalent
+```js
+{
+    node : 'comment',
+    content : 'Comment node text'
+}
+```
+
+##### document
+`Document` node DON equivalent
+```js
+{
+    node : 'document',
+    title : 'Document title'
+}
+```
+
+##### doctype
+`DocumentType` node DON equivalent
+```js
+{
+    node : 'doctype',
+    name : 'html'
+}
+```
+
 ### attributes
-Represents attributes hash-object of `Element`.
+Represents attributes hash-object of `Element` node.
 ```js
 {
     element : 'checkbox',
@@ -83,66 +122,18 @@ Represents attributes hash-object of `Element`.
 }
 ```
 
-### children
-Represents an array of children of `element` or `document` node.
-Accepts only array of nodes, no other stuff.
-```js
-{
-    node : 'document',
-    children : [{ element : 'html' }]
-}
-```
-```js
-{
-    element : 'list',
-    children : [
-        { element : 'item', content : 'First item' },
-        { element : 'item', content : 'Second item' }
-    ]
-}
-```
-
 ### content
-Represents arbitrary content of `element` node.
-```js
-{
-    element : 'form',
-    content : [
-        'Form title',
-        { element : 'input' },
-        { element : 'button', text : 'Submit' }
-    ]
-}
-```
-
-
-### comment
-`Comment` DON equivalent
-```js
-{
-    node : 'comment',
-    comment : 'Something strange'
-}
-```
-
-### document
-`Document` DON equivalent
+Represents content of `element`, `text`, `document` or `comment` node.
 ```js
 {
     node : 'document',
-    title : 'Fuck you!'
+    content : [
+        { node : 'comment', content : 'Comment text' },
+        { node : 'text', content : 'Text node content' },
+        { element : 'button', content : 'Submit' }
+    ]
 }
 ```
-
-### doctype
-`DocumentType` DON equivalent
-```js
-{
-    node : 'doctype',
-    doctype : 'html'
-}
-```
-</details>
 
 ## Full feature example
 
@@ -167,17 +158,17 @@ It's DON representation is:
 ```javascript
 {
     node : 'document',
-    children : [
+    content : [
         {
             node : 'doctype',
-            doctype : 'html'
+            name : 'html'
         },
         {
             element : 'html',
-            children : [
+            content : [
                 {
                     element : 'head',
-                    children : [
+                    content : [
                         {
                             element : 'meta',
                             attributes : { charset : 'utf-8' }
@@ -193,7 +184,7 @@ It's DON representation is:
                 },
                 {
                     element : 'body',
-                    children : [
+                    content : [
                         {
                             node : 'comment',
                             comment : ' hyperlink to DON repository '

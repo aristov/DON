@@ -1,6 +1,6 @@
-# Document Object Notation
+# Document object notation
 
-Document Object Notation (DON) — format intended for convenient work with HTML and XML documents in JavaScript.
+Document object notation (DON) — format intended for convenient work with HTML and XML documents in JavaScript.
 It represents a DOM structure as a tree of simple JS-objects with some special fields.
 
 ## Simple Explanation
@@ -171,7 +171,7 @@ It's DON representation is:
 ## Installation
 
 ```
-npm install https://github.com/aristov/don.git --save
+npm install https://github.com/aristov/DON.git --save
 ```
 
 ## Usage

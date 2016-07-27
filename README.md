@@ -33,13 +33,9 @@ It's DON representation is:
 
 ## Details
 
-`node` special field is used to specify the name of a DOM node represented by the object:
-
-- `document`
-- `doctype`
-- `text`
-- `comment`
-- `element`
+`node` special field is used to specify the name of a DOM node represented by the object.<br> 
+It supports the following values: `document`, `doctype`, `text`, `comment`, `element`.<br>
+In depending of this value DON-object may have other special fields, such as: `element`, `content`, `attributes`, `name` etc.
 
 ### Examples
 
@@ -47,8 +43,7 @@ It's DON representation is:
 `Document` node DON equivalent
 ```js
 {
-    node : 'document',
-    title : 'Document title'
+    node : 'document'
 }
 ```
 
@@ -71,7 +66,7 @@ It's DON representation is:
 ```
 Text node may be represented as a simple string:
 ```js
-'Hello baby!'
+'Hello world!'
 ```
 
 #### comment
@@ -96,6 +91,62 @@ When `element` field is specified, `node` may be omitted:
 {
     element : 'input'
 }
+```
+
+## Installation
+
+```
+npm install https://github.com/aristov/DON.git --save
+```
+
+## Usage
+
+Import module:
+```js
+import DON from 'DON';
+```
+
+Convert entire document to DON format:
+```js
+DON.fromDOM(document);
+```
+```js
+// result:
+{ node : 'document', content : <...> }
+```
+
+Convert XML string to DON format:
+```js
+DON.fromXML('<root><item foo="bar"/></root>')
+```
+```js
+// simplified result: 
+{ 
+    node : 'document',
+    content : {
+        element : 'root',
+        content : { 
+            element : 'item', 
+            attributes : { foo : 'bar' } 
+        }
+    } 
+} 
+```
+
+Convert DON object to DOM node:
+```js
+DON.toDOM({ element : 'button', content : 'Submit' }); 
+```
+```js
+// result:
+<button>Submit</button>
+```
+
+Import methods separately:
+```js
+import fromDOM from 'DON/lib/fromDOM';
+import fromXML from 'DON/lib/fromXML';
+import toDOM from 'DON/lib/toDOM';
 ```
 
 ## Full feature example
@@ -166,31 +217,6 @@ It's DON representation is:
         }
     ]
 }
-```
-
-## Installation
-
-```
-npm install https://github.com/aristov/DON.git --save
-```
-
-## Usage
-
-```js
-import DON from 'DON';
-
-// convert entire document to DON format
-DON.fromDOM(document);
-
-// convert DON object to DOM node
-DON.toDOM({ element : 'button', content : 'Submit' });
-```
-
-Import methods separately:
-
-```js
-import fromDOM from 'DON/lib/fromDOM';
-import toDOM from 'DON/lib/toDOM';
 ```
 
 ## License

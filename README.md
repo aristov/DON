@@ -33,9 +33,9 @@ It's DON representation is:
 
 ## Details
 
-`node` special field is used to specify the name of a DOM node represented by the object.<br> 
+The `node` special field is used to specify the name of a DOM node represented by the object.<br> 
 It supports the following values: `document`, `doctype`, `text`, `comment`, `element`.<br>
-In depending of this value DON-object may have other special fields, such as: `element`, `content`, `attributes`, `name` etc.
+Depend on this value DON-object may have other special fields, such as: `element`, `attributes`, `content`, `name` etc.
 
 ### Examples
 
@@ -43,7 +43,8 @@ In depending of this value DON-object may have other special fields, such as: `e
 `Document` node DON equivalent
 ```js
 {
-    node : 'document'
+    node : 'document',
+    content : [/* document content */]
 }
 ```
 
@@ -101,26 +102,26 @@ npm install https://github.com/aristov/DON.git --save
 
 ## Usage
 
-Import module:
+#### Import module:
 ```js
 import DON from 'DON';
 ```
 
-Convert entire document to DON format:
+#### Convert entire document to DON format:
 ```js
 DON.fromDOM(document);
 ```
+Result:
 ```js
-// result:
 { node : 'document', content : <...> }
 ```
 
-Convert XML string to DON format:
+#### Convert XML string to DON format:
 ```js
 DON.fromXML('<root><item foo="bar"/></root>')
 ```
+Simplified result: 
 ```js
-// simplified result: 
 { 
     node : 'document',
     content : {
@@ -133,16 +134,16 @@ DON.fromXML('<root><item foo="bar"/></root>')
 } 
 ```
 
-Convert DON object to DOM node:
+#### Convert DON object to DOM node:
 ```js
 DON.toDOM({ element : 'button', content : 'Submit' }); 
 ```
+Result:
 ```js
-// result:
 <button>Submit</button>
 ```
 
-Import methods separately:
+#### Import methods separately:
 ```js
 import fromDOM from 'DON/lib/fromDOM';
 import fromXML from 'DON/lib/fromXML';
@@ -167,7 +168,7 @@ Consider this simple HTML-document:
 </html>
 ```
 
-It's DON representation is:
+It's full DON representation is:
 
 ```javascript
 {
@@ -178,16 +179,20 @@ It's DON representation is:
             name : 'html'
         },
         {
+            node : 'element',
             element : 'html',
             content : [
                 {
+                    node : 'element',
                     element : 'head',
                     content : [
                         {
+                            node : 'element',
                             element : 'meta',
                             attributes : { charset : 'utf-8' }
                         },
                         {
+                            node : 'element',
                             element : 'title',
                             content : {
                                 node : 'text',
@@ -197,13 +202,15 @@ It's DON representation is:
                     ]
                 },
                 {
+                    node : 'element',
                     element : 'body',
                     content : [
                         {
                             node : 'comment',
-                            comment : ' hyperlink to DON repository '
+                            content : ' hyperlink to DON repository '
                         },
                         {
+                            node : 'element',
                             element : 'a',
                             attributes : { href : '//github.com/aristov/don' },
                             content : {

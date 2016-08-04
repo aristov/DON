@@ -23,7 +23,7 @@ It's DON representation is:
 ```js
 {
     element : 'searchgroup',
-    attributes : { label : 'Simple' },
+    attributes : { label : 'Search by Yandex' },
     content : [
         { element : 'searchbox' },
         { element : 'submitbutton', content : 'Go' }

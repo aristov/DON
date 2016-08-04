@@ -7,19 +7,23 @@ It represents a DOM structure as a tree of simple JS-objects with some special f
 
 The most commonly used fields are:
 
-- `element` — the name of `Element` DOM node
-- `attributes` — attributes hash-object of `Element` DOM node
-- `content` — content of `Element` DOM node
+-   `element` — the name of `Element` DOM node
+-   `attributes` — attributes hash-object of `Element` DOM node
+-   `content` — content of `Element` DOM node
 
 ### Example
+
 Consider simple UI fragment XML murkup:
+
 ```xml
 <searchgroup label="Search by Yandex">
     <searchbox/>
     <submitbutton>Go</submitbutton>
 </searchgroup>
 ```
+
 It's DON representation is:
+
 ```js
 {
     element : 'searchgroup',
@@ -40,7 +44,9 @@ Depend on this value DON-object may have other special fields, such as: `element
 ### Examples
 
 #### document
+
 `Document` node DON equivalent
+
 ```js
 {
     node : 'document',
@@ -49,7 +55,9 @@ Depend on this value DON-object may have other special fields, such as: `element
 ```
 
 #### doctype
+
 `DocumentType` node DON equivalent
+
 ```js
 {
     node : 'doctype',
@@ -58,20 +66,26 @@ Depend on this value DON-object may have other special fields, such as: `element
 ```
 
 #### text
+
 `Text` node DON equivalent
+
 ```js
 {
     node : 'text',
     content : 'Hello world!'
 }
 ```
+
 Text node may be represented as a simple string:
+
 ```js
 'Hello world!'
 ```
 
 #### comment
+
 `Comment` node DON equivalent
+
 ```js
 {
     node : 'comment',
@@ -80,14 +94,18 @@ Text node may be represented as a simple string:
 ```
 
 #### element
+
 `Element` node DON equivalent
+
 ```js
 {
     node : 'element',
     element : 'input'
 }
 ```
+
 When `element` field is specified, `node` may be omitted:
+
 ```js
 {
     element : 'input'
@@ -96,31 +114,36 @@ When `element` field is specified, `node` may be omitted:
 
 ## Installation
 
-```
-npm install https://github.com/aristov/DON.git --save
-```
+    npm install https://github.com/aristov/DON.git --save
 
 ## Usage
 
 #### Import module:
+
 ```js
 import DON from 'DON';
 ```
 
 #### Convert entire document to DON format:
+
 ```js
 DON.fromDOM(document);
 ```
+
 Result:
+
 ```js
 { node : 'document', content : <...> }
 ```
 
 #### Convert XML string to DON format:
+
 ```js
 DON.fromXML('<root><item foo="bar"/></root>')
 ```
+
 Simplified result: 
+
 ```js
 { 
     node : 'document',
@@ -135,20 +158,60 @@ Simplified result:
 ```
 
 #### Convert DON object to DOM node:
+
 ```js
 DON.toDOM({ element : 'button', content : 'Submit' }); 
 ```
+
 Result:
+
 ```js
 <button>Submit</button>
 ```
 
 #### Import methods separately:
+
 ```js
 import fromDOM from 'DON/lib/fromDOM';
 import fromXML from 'DON/lib/fromXML';
 import toDOM from 'DON/lib/toDOM';
 ```
+
+## API
+
+### DON
+
+Module includes tools to convert DON format and DOM/XML/HTML to each other
+
+### fromDOM
+
+Converts DOM-tree to DON-tree
+
+**Parameters**
+
+-   `node` **[Node](https://developer.mozilla.org/en-US/docs/Web/API/Node/nextSibling)** root DOM-node
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Document object notaion
+
+### fromXML
+
+Converts XML-string to DON-tree
+
+**Parameters**
+
+-   `xml` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Document object notation
+
+### toDOM
+
+Converts DON-tree to DOM-tree
+
+**Parameters**
+
+-   `object` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** — source DON-tree root object
+
+Returns **[Node](https://developer.mozilla.org/en-US/docs/Web/API/Node/nextSibling)** resulting DOM-tree root node
 
 ## Full feature example
 

@@ -1,5 +1,8 @@
 {
   "name": "DON",
   "author": "Viacheslav Aristov <vv.aristov@gmail.com>",
-  "version": "0.0.2"
+  "version": "0.0.2",
+  "devDependencies": {
+    "documentation": "^4.0.0-beta9"
+  }
 }
